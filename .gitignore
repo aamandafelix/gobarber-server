@@ -4,3 +4,7 @@
 # temp files
 tmp/*
 !tmp/.gitkeep
+
+# reports
+coverage
+*.lcov
