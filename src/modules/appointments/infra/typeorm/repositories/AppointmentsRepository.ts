@@ -17,7 +17,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
       where: { date },
     });
 
-    return findAppointment || undefined;
+    return findAppointment;
   }
 
   public async create({
