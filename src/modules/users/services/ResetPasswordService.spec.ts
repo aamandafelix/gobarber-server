@@ -1,3 +1,5 @@
+import AppError from '@shared/errors/AppError';
+
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeUserTokensRepository from '../repositories/fakes/FakeUserTokensRepository';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
@@ -41,5 +43,27 @@ describe('ResetPasswordService', () => {
 
     expect(generateHash).toHaveBeenCalledWith('123123');
     expect(updatedUser?.password).toBe('123123');
+  });
+
+  it('should not be able to reset the password with non-existing token', async () => {
+    await expect(
+      resetPassword.execute({
+        password: '123123',
+        token: 'non-existing token',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to reset the password with non-existing user', async () => {
+    const { token } = await fakeUserTokensRepository.generate(
+      'non-existing-user',
+    );
+
+    await expect(
+      resetPassword.execute({
+        password: '123123',
+        token,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
