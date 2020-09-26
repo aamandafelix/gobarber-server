@@ -57,4 +57,22 @@ describe('UpdateProfileService', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should be able to updated the password', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@mail.com',
+      password: '123456',
+    });
+
+    const updatedUser = await updateProfile.execute({
+      user_id: user.id,
+      name: 'John F. Doe',
+      email: 'johnfdoe@mail.com',
+      old_password: '123456',
+      password: '121212',
+    });
+
+    expect(updatedUser.password).toBe('121212');
+  });
 });
