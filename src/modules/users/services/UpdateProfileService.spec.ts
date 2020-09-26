@@ -35,4 +35,26 @@ describe('UpdateProfileService', () => {
     expect(updatedUser.name).toBe('John F. Doe');
     expect(updatedUser.email).toBe('johnfdoe@mail.com');
   });
+
+  it('should not be able to change to another user email', async () => {
+    await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@mail.com',
+      password: '123456',
+    });
+
+    const user = await fakeUsersRepository.create({
+      name: 'John Erick Doe',
+      email: 'johnerickdoe@mail.com',
+      password: '123456',
+    });
+
+    await expect(
+      updateProfile.execute({
+        user_id: user.id,
+        name: 'John E. Doe',
+        email: 'johndoe@mail.com',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
