@@ -3,16 +3,22 @@ import AppError from '@shared/errors/AppError';
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository';
 import CreateAppointmentService from './CreateAppointmentService';
 
+let fakeAppointmentsRepository: FakeAppointmentsRepository;
+let createAppointment: CreateAppointmentService;
+
 describe('CreateAppointmentService', () => {
-  it('should be able to create a new appointment', async () => {
-    const fakeAppointmentsRepository = new FakeAppointmentsRepository();
-    const createAppointment = new CreateAppointmentService(
+  beforeEach(() => {
+    fakeAppointmentsRepository = new FakeAppointmentsRepository();
+    createAppointment = new CreateAppointmentService(
       fakeAppointmentsRepository,
     );
+  });
 
+  it('should be able to create a new appointment', async () => {
     const appointment = await createAppointment.execute({
-      date: new Date(),
+      date: new Date(2020, 4, 10, 13),
       provider_id: '123123123',
+      user_id: '1111111',
     });
 
     expect(appointment).toHaveProperty('id');
@@ -20,22 +26,19 @@ describe('CreateAppointmentService', () => {
   });
 
   it('should not be able to create two appointments on the same time', async () => {
-    const fakeAppointmentsRepository = new FakeAppointmentsRepository();
-    const createAppointment = new CreateAppointmentService(
-      fakeAppointmentsRepository,
-    );
-
-    const appointmentDate = new Date(2020, 8, 19, 11);
+    const appointmentDate = new Date(2020, 8, 19, 13);
 
     await createAppointment.execute({
       date: appointmentDate,
       provider_id: '123123123',
+      user_id: '1111111',
     });
 
     await expect(
       createAppointment.execute({
         date: appointmentDate,
         provider_id: '123123123',
+        user_id: '1111111',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
