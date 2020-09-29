@@ -8,3 +8,6 @@ tmp/*
 # reports
 coverage
 *.lcov
+
+# env variables
+.env
