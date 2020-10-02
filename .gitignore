@@ -1,3 +1,7 @@
+# ides
+.idea/
+.vscode/
+
 # dependencies
 /node_modules
 
@@ -11,3 +15,10 @@ coverage
 
 # env variables
 .env
+
+# database
+ormconfig.json
+
+# others
+build/
+dist
