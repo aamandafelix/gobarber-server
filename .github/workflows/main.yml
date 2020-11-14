@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v2 # pega versão mais atualizada do código
+      - uses: actions/checkout@v2 # Get updated code version
       
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.2
@@ -26,7 +26,7 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }} # Variable in Settings > Secrets
-          username: ${{ secrets.SSH_USERNAME }} # Variable in Settings > Secrets
+          username: ${{ secrets.SSH_USER }} # Variable in Settings > Secrets
           port: ${{ secrets.SSH_PORT }} # Variable in Settings > Secrets
           key: ${{ secrets.SSH_KEY }} # Variable in Settings > Secrets
           source: ".,!node_modules" # Copy all except node_modules
