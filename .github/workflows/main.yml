@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   push:
@@ -31,3 +31,31 @@ jobs:
           key: ${{ secrets.SSH_KEY }} # Variable in Settings > Secrets
           source: ".,!node_modules" # Copy all except node_modules
           target: "~/app/gobarber-server" # Files will be copy to this path
+ 
+      - name: Install dependencies on Digital Ocean
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }} # Variable in Settings > Secrets
+          username: ${{ secrets.SSH_USER }} # Variable in Settings > Secrets
+          port: ${{ secrets.SSH_PORT }} # Variable in Settings > Secrets
+          script: | # | for multiple commands
+            cd ~/app/gobarber-server
+            yarn
+            
+      - name: Run migrations on Digital Ocean
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }} # Variable in Settings > Secrets
+          username: ${{ secrets.SSH_USER }} # Variable in Settings > Secrets
+          port: ${{ secrets.SSH_PORT }} # Variable in Settings > Secrets
+          script: | # | for multiple commands
+            cd ~/app/gobarber-server
+            ./node_modules/.bin/typeorm migration:run
+                        
+      - name: Restart Node.js
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }} # Variable in Settings > Secrets
+          username: ${{ secrets.SSH_USER }} # Variable in Settings > Secrets
+          port: ${{ secrets.SSH_PORT }} # Variable in Settings > Secrets
+          script: pm2 restart gobarber-api # pm2 restart PROCESS_NAME (To see the process name run pm2 list)
