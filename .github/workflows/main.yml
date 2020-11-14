@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2 # pega versão mais atualizada do código
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 12.x # versão LTS
+      
+      - name: Install dependencies
+        run: yarn
+      
+      - name: Run build
+        run: yarn build
+
+      - name: Copy code to Digital Ocean
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }} # Variable in Settings > Secrets
+          username: ${{ secrets.SSH_USERNAME }} # Variable in Settings > Secrets
+          port: ${{ secrets.SSH_PORT }} # Variable in Settings > Secrets
+          key: ${{ secrets.SSH_KEY }} # Variable in Settings > Secrets
+          source: ".,!node_modules" # Copy all except node_modules
+          target: "~/app/gobarber-server" # Files will be copy to this path
