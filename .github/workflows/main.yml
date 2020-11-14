@@ -38,6 +38,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }} # Variable in Settings > Secrets
           username: ${{ secrets.SSH_USER }} # Variable in Settings > Secrets
           port: ${{ secrets.SSH_PORT }} # Variable in Settings > Secrets
+          key: ${{ secrets.SSH_KEY }} # Variable in Settings > Secrets
           script: | # | for multiple commands
             cd ~/app/gobarber-server
             yarn
@@ -48,6 +49,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }} # Variable in Settings > Secrets
           username: ${{ secrets.SSH_USER }} # Variable in Settings > Secrets
           port: ${{ secrets.SSH_PORT }} # Variable in Settings > Secrets
+          key: ${{ secrets.SSH_KEY }} # Variable in Settings > Secrets
           script: | # | for multiple commands
             cd ~/app/gobarber-server
             ./node_modules/.bin/typeorm migration:run
@@ -58,4 +60,5 @@ jobs:
           host: ${{ secrets.SSH_HOST }} # Variable in Settings > Secrets
           username: ${{ secrets.SSH_USER }} # Variable in Settings > Secrets
           port: ${{ secrets.SSH_PORT }} # Variable in Settings > Secrets
+          key: ${{ secrets.SSH_KEY }} # Variable in Settings > Secrets
           script: pm2 restart gobarber-api # pm2 restart PROCESS_NAME (To see the process name run pm2 list)
