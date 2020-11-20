@@ -13,7 +13,7 @@ export default {
 
   defaults: {
     from: {
-      email: '', // e-mail verificado e de domínio próprio aqui
+      email: 'me@amandabezerra.dev',
       name: 'GoBarber - Amanda Bezerra',
     },
   },
