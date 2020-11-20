@@ -1,72 +1,32 @@
-# Recuperação de Senha
+# GoBarber API
 
-**RF - Requisitos Funcionais**
+<div align="center">
+  <img src=".github/logo.png">
+</div>
+</br>
+<div align="center">
+  <a href="https://www.typescriptlang.org/">
+    <img src="https://img.shields.io/badge/made%20with-typescript-orange">
+  </a>
+  <a href="https://nodejs.org/">
+    <img src="https://img.shields.io/badge/made%20with-nodejs-orange">
+  </a>
+  <a href="https://github.com/amandabezerra/gobarber-server/proffy/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-orange">
+  </a>
+</div>
 
-- O usuário deve poder recuperar sua senha informando o seu e-mail;
-- O usuário deve receber um e-mail com instruções de recuperação de senha;
-- O usuário deve poder resetar sua senha;
+## ℹ️ Sobre
 
-**RFN - Requisitos Não Funcionais**
+Este projeto consiste em uma API desenvolvida durante o [Bootcamp GoStack](https://pages.rocketseat.com.br/gostack) da Rocketseat com o objetivo de fornecer funcionalidades para o front-end [GoBarber Web](https://github.com/amandabezerra/gobarber-web) e mobile [GoBarber App](https://github.com/amandabezerra/gobarber-app).
 
-- Utilizar Mailtrap para restar envios de e-mail em ambiente de desenvolvimento;
-- Utilizar Amazon SES para envios em produção;
-- O envio de e-mails deve acontecer em segundo plano (background job);
+## 💻 Tecnologias
 
-**RN - Regras de Negócio**
-
-- O link enviado por e-mail para resetar senha deve expirar em 2 horas;
-- O usuário precisa confirmar a nova senha ao resetar sua senha;
-
-
-# Atualização do perfil
-
-**RF - Requisitos Funcionais**
-
-- O usuário deve poder atualizar seu nome, e-mail e senha;
-
-**RN - Regras de Negócio**
-
-- O usuário não pode alterar seu e-mail para um e-mail já utilizado;
-- Para atualizar sua senha, o usuário deve informar a senha antiga;
-- Para atualizar sua senha, o usuário precisa confirmar a nova senha;
-
-
-# Painel do prestador
-
-**RF - Requisitos Funcionais**
-
-- O usuário deve poder listar seus agendamentos de um dia específico;
-- O prestador deve receber uma notificação sempre que houver um novo agendamento;
-- O prestador deve poder visualizar as notificações não lidas;
-
-**RFN - Requisitos Não Funcionais**
-
-- Os agendamentos do prestador no dia devem ser armazenados em cache;
-- As notificações do prestador devem ser armazenadas no MongoDB;
-- As notificações do prestador devem ser enviadas em tempo-real utilizando Socket.io;
-
-**RN - Regras de Negócio**
-
-- A notificação deve ter um status de lida ou não-lida para que o prestador possa controlar;
-
-
-# Agendamento de serviços
-
-**RF - Requisitos Funcionais**
-
-- O usuário deve poder listar todos prestadores de serviços cadastrados;
-- O usuário deve poder listar os dias de um mês com pelo menos um horário disponível de um prestador;
-- O usuário deve poder listar horários disponíveis em um dia específico de um prestador;
-- O usuário deve poder realizar um novo agendamento com um prestador;
-
-**RFN - Requisitos Não Funcionais**
-
-- A listagem de prestadores deve ser armazenada em cache;
-
-**RN - Regras de Negócio**
-
-- Cada agendamento deve durar 1 hora exatamente;
-- Os agendamentos devem estar disponíveis entre 8h às 18h (Primeiro horário às 8h, último às 17h);
-- O usuário não pode agendar em um horário já ocupado;
-- O usuário não pode agendar em um horário que já passou;
-- O usuário não pode agendar serviços consigo mesmo;
++ [Typescript](https://www.typescriptlang.org/)
++ [Node.js](https://nodejs.org/)
++ [Express](https://expressjs.com/)
++ [TypeORM](https://typeorm.io/)
++ [PostgreSQL](https://www.postgresql.org/)
++ [JWT Token](https://jwt.io/)
++ [Multer](https://www.npmjs.com/package/multer)
++ [Jest](https://jestjs.io/)
